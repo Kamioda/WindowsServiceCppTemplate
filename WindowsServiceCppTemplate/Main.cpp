@@ -47,7 +47,11 @@ void WINAPI ServiceMain(DWORD dwArgc, LPTSTR lpszArgv[]) {
 	if (SvcStatus.dwCurrentState != SERVICE_STOPPED) SvcStatus.dwCurrentState = SERVICE_STOPPED;
 	SetServiceStatusInfo();
 }
-
+#if defined(_DEBUG) && defined(CONSOLE)
+int main() {
+	ServiceMain(0, nullptr);
+}
+#else
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpCmdLine, int CmdShow) {
 	std::strlen(lpCmdLine) == 0 ? Main_ServiceDispatcher() : Console_MainProcess(hInstance, Console_CommandLineManager::GetCommandLineArg(lpCmdLine), CmdShow);
 	return 0;
@@ -60,3 +64,4 @@ void Main_ServiceDispatcher() {
 	};
 	StartServiceCtrlDispatcher(SvcTable);
 }
+#endif
