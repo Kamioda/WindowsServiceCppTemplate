@@ -29,6 +29,6 @@ ServiceProcess::ServiceProcess(const Service_CommandLineManager::CommandLineType
 	SetServiceStatusInfo();
 }
 
-Service_CommandLineManager::CommandLineStringType ServiceProcess::ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path) {
+Service_CommandLineManager::CommandLineStringType ServiceProcess::ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path) const noexcept {
 	return Service_CommandLineManager::AlignCmdLineStrType(":") == Path.substr(1, 1) ? Path : this->ModuleFileDirectory + Path;
 }

@@ -19,7 +19,7 @@ class ServiceProcess {
 protected:
 	Service_CommandLineManager::CommandLineType Argv;
 	Service_CommandLineManager::CommandLineStringType ModuleFileDirectory;
-	Service_CommandLineManager::CommandLineStringType ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path);
+	Service_CommandLineManager::CommandLineStringType ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path) const noexcept;
 public:
 	virtual void Service_MainProcess() = 0;
 public:
