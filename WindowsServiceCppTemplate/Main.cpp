@@ -48,9 +48,17 @@ void WINAPI ServiceMain(DWORD dwArgc, LPTSTR lpszArgv[]) {
 	SetServiceStatusInfo();
 }
 #if defined(_DEBUG) && defined(CONSOLE)
-int main() {
-	ServiceMain(0, nullptr);
+#ifdef UNICODE
+int wmain(int argc, wchar_t* argv[]) {
+	ServiceMain(static_cast<DWORD>(argc), argv);
+	return 0;
 }
+#else
+int main(int argc, char* argv[]) {
+	ServiceMain(static_cast<DWORD>(argc), argv);
+	return 0;
+}
+#endif
 #else
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpCmdLine, int CmdShow) {
 	std::strlen(lpCmdLine) == 0 ? Main_ServiceDispatcher() : Console_MainProcess(hInstance, Console_CommandLineManager::GetCommandLineArg(lpCmdLine), CmdShow);
