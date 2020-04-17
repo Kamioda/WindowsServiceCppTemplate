@@ -16,7 +16,6 @@ std::vector<std::basic_string<TCHAR>> GetServiceCommandLineArgs(DWORD dwArgc, LP
 	return Args;
 }
 
-
 DWORD WINAPI HandlerEx(DWORD dwControl, DWORD, LPVOID, LPVOID) {
 	switch (dwControl) {
 		case SERVICE_CONTROL_SHUTDOWN:
