@@ -18,10 +18,15 @@ namespace Service_CommandLineManager = CommandLineManagerA;
 class ServiceProcess {
 protected:
 	Service_CommandLineManager::CommandLineType Argv;
+	Service_CommandLineManager::CommandLineStringType ModuleFileDirectory;
+	Service_CommandLineManager::CommandLineStringType ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path);
 public:
 	virtual void Service_MainProcess() = 0;
 public:
-	ServiceProcess(const Service_CommandLineManager::CommandLineType& args);
+	// Arguments
+	// args                         : Argument of GetServiceProcessInstance function
+	// CurrentDirectoryIsModulePath : Flag of moving current directory to directory module file exists. If this parameter is false, current directory is C:\Windows\System32
+	ServiceProcess(const Service_CommandLineManager::CommandLineType& args, const bool CurrentDirectoryIsModulePath = false);
 };
 
 ServiceProcess* GetServiceProcessInstance(const Service_CommandLineManager::CommandLineType& args);

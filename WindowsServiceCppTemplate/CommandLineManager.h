@@ -9,6 +9,7 @@ namespace CommandLine {
 		std::string AlignCmdLineStrType(const std::wstring& str);
 		std::vector<std::string> GetCommandLineArg(const std::vector<std::string>& args);
 		std::vector<std::string> GetCommandLineArg(const std::vector<std::wstring>& args);
+		typedef std::string CommandLineStringType;
 		typedef std::vector<std::string> CommandLineType;
 	}
 	namespace WCharArg {
@@ -18,6 +19,7 @@ namespace CommandLine {
 		std::wstring AlignCmdLineStrType(const std::wstring& str);
 		std::vector<std::wstring> GetCommandLineArg(const std::vector<std::string>& args);
 		std::vector<std::wstring> GetCommandLineArg(const std::vector<std::wstring>& args);
+		typedef std::wstring CommandLineStringType;
 		typedef std::vector<std::wstring> CommandLineType;
 	}
 }
