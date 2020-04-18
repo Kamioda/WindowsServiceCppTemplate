@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "CommandLineManager.h"
-#include <Windows.h>
 
 /*
 	Service_CommandLineManager
