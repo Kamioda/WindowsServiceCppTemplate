@@ -13,7 +13,7 @@ bool SetServiceStatusInfoImpl() noexcept {
 #endif
 }
 void SetServiceStatusInfo() noexcept { SetServiceStatusInfoImpl(); }
-void SetServiceStatusInfoE() noexcept(false) { if (SetServiceStatusInfoImpl()) throw std::runtime_error("Failed to set service status\n" + GetErrorMessageA()); }
+void SetServiceStatusInfoE() noexcept(false) { if (!SetServiceStatusInfoImpl()) throw std::runtime_error("Failed to set service status\n" + GetErrorMessageA()); }
 void Main_ServiceDispatcher();
 std::vector<std::basic_string<TCHAR>> GetServiceCommandLineArgs(DWORD dwArgc, LPTSTR lpszArgv[]) {
 	if (dwArgc == 1) return std::vector<std::basic_string<TCHAR>>{};
