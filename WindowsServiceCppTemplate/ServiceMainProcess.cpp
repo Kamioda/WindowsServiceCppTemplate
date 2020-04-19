@@ -5,7 +5,7 @@
 
 std::basic_string<TCHAR> GetModuleFileDirectory() {
 	TCHAR Buffer[MAX_PATH];
-	if (ERROR_SUCCESS != GetModuleFileName(NULL, Buffer, MAX_PATH)) return std::basic_string<TCHAR>{};
+	if (0 == GetModuleFileName(NULL, Buffer, MAX_PATH)) return std::basic_string<TCHAR>{};
 	const std::basic_string<TCHAR> path = std::basic_string<TCHAR>(Buffer);
 	const std::filesystem::path modulepath(path);
 #ifdef UNICODE
