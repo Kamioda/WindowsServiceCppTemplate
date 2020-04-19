@@ -1,6 +1,7 @@
 ﻿#include "Console.h"
 #include <Windows.h>
 #include <iostream>
+#include <stdlib.h>
 
 Console::Console() : fp(nullptr) {
 	if (FALSE == AttachConsole(ATTACH_PARENT_PROCESS)) {
@@ -15,6 +16,7 @@ Console::~Console() {
 	FreeConsole();
 }
 
-void Console::WriteLine(const std::string& data) const {
+void Console::WriteLine(const std::string& data, const bool Pause) const {
 	std::cout << data << std::endl;
+	if (Pause) system("pause");
 };

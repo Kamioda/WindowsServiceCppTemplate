@@ -8,5 +8,5 @@ private:
 public:
 	Console();
 	~Console();
-	void WriteLine(const std::string& str) const;
+	void WriteLine(const std::string& str, const bool Pause = false) const;
 };
