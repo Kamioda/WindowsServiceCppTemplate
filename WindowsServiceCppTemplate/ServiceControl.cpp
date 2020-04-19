@@ -8,19 +8,6 @@
 
 ServiceControl::ServiceControl() : ServiceController(CommandLineManagerA::AlignCmdLineStrType(ServiceInfo::Name), false) {}
 
-ServiceControl::~ServiceControl() { 
-	CloseServiceHandle(this->Service);
-	CloseServiceHandle(this->SCM);
-}
-
-void ServiceControl::Open() {
-	ServiceController::Open();
-}
-
-void ServiceControl::Control(const DWORD dwControl) {
-	ServiceController::Control(dwControl);
-}
-
 void ServiceControl::Install() {
 	std::basic_string<TCHAR> ModulePath{};
 	ModulePath.reserve(MAX_PATH);
@@ -70,7 +57,7 @@ void ServiceControl::Install() {
 }
 
 void ServiceControl::Uninstall() {
-	this->Open();
+	ServiceController::Open();
 	if (const DWORD dwServiceStatus = this->Show(); dwServiceStatus != SERVICE_STOPPED && dwServiceStatus != SERVICE_STOP_PENDING) this->Stop();
 	if (FALSE == DeleteService(this->Service)) {
 		throw std::runtime_error(
