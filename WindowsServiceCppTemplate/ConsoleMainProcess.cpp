@@ -1,5 +1,6 @@
 ﻿#include "ConsoleMainProcess.h"
 #include "ServiceControl.h"
+#include "Console.h"
 #include <Windows.h>
 #include <iostream>
 #include <string>
@@ -28,22 +29,27 @@ inline std::string GetServiceStatusString(const DWORD dwCurrentState) {
 
 void Console_MainProcess(HINSTANCE hInstance, const Console_CommandLineManager::CommandLineType& CommandLines, int nCmdShow) {
 	const Console_CommandLineManager::CommandLineType ReservedArgs = { "install", "uninstall", "run", "stop", "pause", "continue", "show" };
-	if (std::find(ReservedArgs.begin(), ReservedArgs.end(), CommandLines.at(0)) != ReservedArgs.end()) {
-		ServiceControl SvcCtrl{};
-		if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("install")) SvcCtrl.Install();
-		else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("uninstall")) SvcCtrl.Uninstall();
-		else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("run")) SvcCtrl.Run();
-		else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("stop")) SvcCtrl.Stop();
-		else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("pause")) SvcCtrl.Pause();
-		else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("continue")) SvcCtrl.Pause();
+	Console console{};
+	try {
+		if (std::find(ReservedArgs.begin(), ReservedArgs.end(), CommandLines.at(0)) != ReservedArgs.end()) {
+			ServiceControl SvcCtrl{};
+			if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("install")) SvcCtrl.Install();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("uninstall")) SvcCtrl.Uninstall();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("run")) SvcCtrl.Run();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("stop")) SvcCtrl.Stop();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("pause")) SvcCtrl.Pause();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("continue")) SvcCtrl.Pause();
+			else {
+				const DWORD dwServiceStatus = SvcCtrl.Show();
+				console.WriteLine(GetServiceStatusString(dwServiceStatus));
+			}
+		}
 		else {
-			const DWORD dwServiceStatus = SvcCtrl.Show();
-			if (FALSE == AttachConsole(ATTACH_PARENT_PROCESS)) AllocConsole();
-			std::cout << GetServiceStatusString(dwServiceStatus) << std::endl;
+			// ここに他のコマンドライン引数が与えられた時の処理を書く
+
 		}
 	}
-	else {
-		// ここに他のコマンドライン引数が与えられた時の処理を書く
-
+	catch (const std::exception& er) {
+		console.WriteLine(er.what());
 	}
 }

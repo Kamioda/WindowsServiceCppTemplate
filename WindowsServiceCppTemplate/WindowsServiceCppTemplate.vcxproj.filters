@@ -33,6 +33,9 @@
     <ClCompile Include="ServiceControl.cpp">
       <Filter>BaseCode</Filter>
     </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>BaseCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandLineManager.h">
@@ -54,6 +57,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ServiceControl.h">
+      <Filter>BaseCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
       <Filter>BaseCode</Filter>
     </ClInclude>
   </ItemGroup>

@@ -202,6 +202,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CommandLineManager.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="ConsoleMainProcess.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ServiceControl.cpp" />
@@ -209,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandLineManager.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="ConsoleMainProcess.h" />
     <ClInclude Include="GetErrorMessage.h" />
     <ClInclude Include="ServiceControl.h" />
