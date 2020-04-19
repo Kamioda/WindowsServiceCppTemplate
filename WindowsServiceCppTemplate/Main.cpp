@@ -5,7 +5,13 @@
 #include <stdexcept>
 SERVICE_STATUS SvcStatus;
 SERVICE_STATUS_HANDLE SvcStatusHandle;
-bool SetServiceStatusInfoImpl() noexcept { return FALSE != SetServiceStatus(SvcStatusHandle, &SvcStatus); }
+bool SetServiceStatusInfoImpl() noexcept { 
+#if defined(_DEBUG) && defined(CONSOLE)
+	return true;
+#else
+	return FALSE != SetServiceStatus(SvcStatusHandle, &SvcStatus);
+#endif
+}
 void SetServiceStatusInfo() noexcept { SetServiceStatusInfoImpl(); }
 void SetServiceStatusInfoE() noexcept(false) { if (SetServiceStatusInfoImpl()) throw std::runtime_error("Failed to set service status\n" + GetErrorMessageA()); }
 void Main_ServiceDispatcher();
@@ -37,7 +43,9 @@ DWORD WINAPI HandlerEx(DWORD dwControl, DWORD, LPVOID, LPVOID) {
 
 void WINAPI ServiceMain(DWORD dwArgc, LPTSTR lpszArgv[]) {
 	try {
+#if !defined(_DEBUG) || !defined(CONSOLE)
 		SvcStatusHandle = RegisterServiceCtrlHandlerEx(lpszArgv[0], HandlerEx, NULL);
+#endif
 		memset(&SvcStatus, 0, sizeof(SvcStatus));
 		ServiceProcess* SvcProcess = GetServiceProcessInstance(Service_CommandLineManager::GetCommandLineArg(GetServiceCommandLineArgs(dwArgc, lpszArgv)));
 		SvcProcess->Service_MainProcess();
