@@ -1,5 +1,4 @@
 ﻿#include "ServiceControl.h"
-#include "CloseServiceHandles.h"
 #include "ServiceInformation.h"
 #include "GetErrorMessage.h"
 #include <ShlObj.h>
@@ -16,7 +15,10 @@ ServiceControl::ServiceControl() : SCM(NULL), Service(NULL) {
 	}
 }
 
-ServiceControl::~ServiceControl() { CloseServiceHandles(this->Service, this->SCM); }
+ServiceControl::~ServiceControl() { 
+	CloseServiceHandle(this->Service);
+	CloseServiceHandle(this->SCM);
+}
 
 void ServiceControl::Open() {
 	if (this->Service = OpenService(this->SCM, ServiceInfo::Name, SERVICE_ALL_ACCESS); this->Service == NULL) {

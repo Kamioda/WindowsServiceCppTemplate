@@ -35,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CloseServiceHandles.h">
-      <Filter>BaseCode</Filter>
-    </ClInclude>
     <ClInclude Include="CommandLineManager.h">
       <Filter>BaseCode</Filter>
     </ClInclude>

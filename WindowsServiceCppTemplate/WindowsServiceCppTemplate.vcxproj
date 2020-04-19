@@ -208,7 +208,6 @@
     <ClCompile Include="ServiceMainProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CloseServiceHandles.h" />
     <ClInclude Include="CommandLineManager.h" />
     <ClInclude Include="ConsoleMainProcess.h" />
     <ClInclude Include="GetErrorMessage.h" />
