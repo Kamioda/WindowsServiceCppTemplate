@@ -3,7 +3,7 @@
 #include <tchar.h>
 #include <filesystem>
 
-std::basic_string<TCHAR> GetModuleFileDirectory() {
+inline std::basic_string<TCHAR> GetModuleFileDirectory() {
 	TCHAR Buffer[MAX_PATH];
 	if (0 == GetModuleFileName(NULL, Buffer, MAX_PATH)) return std::basic_string<TCHAR>{};
 	const std::basic_string<TCHAR> path = std::basic_string<TCHAR>(Buffer);
