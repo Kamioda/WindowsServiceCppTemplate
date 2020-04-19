@@ -1,5 +1,4 @@
 ﻿#include "Console.h"
-#include <Windows.h>
 #include <iostream>
 #include <stdlib.h>
 
@@ -7,6 +6,7 @@ Console::Console() : fp(nullptr) {
 	AllocConsole();
 	freopen_s(&this->fp, "CONOUT$", "w", stdout);
 	freopen_s(&this->fp, "CONOUT$", "w", stderr);
+	this->hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
 Console::~Console() {
@@ -14,7 +14,13 @@ Console::~Console() {
 	FreeConsole();
 }
 
-void Console::WriteLine(const std::string& data, const bool Pause) const {
-	std::cout << data << std::endl;
+DWORD Console::Write(const std::string& str, const bool Pause) const {
+	DWORD dwWriteByte{};
+	WriteConsoleA(this->hStdOutput, str.c_str(), lstrlenA(str.c_str()), &dwWriteByte, NULL);
 	if (Pause) system("pause");
+	return dwWriteByte;
 };
+
+DWORD Console::WriteLine(const std::string& str, const bool Pause) const {
+	return this->Write(str + "\n", Pause);
+}
