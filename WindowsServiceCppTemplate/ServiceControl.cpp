@@ -124,6 +124,7 @@ void ServiceControl::Continue() {
 }
 
 DWORD ServiceControl::Show() {
+	this->Open();
 	SERVICE_STATUS SvcStatusInShow{};
 	if (FALSE == QueryServiceStatus(this->Service, &SvcStatusInShow)) {
 		throw std::runtime_error(
