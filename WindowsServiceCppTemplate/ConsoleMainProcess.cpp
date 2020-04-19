@@ -28,14 +28,14 @@ inline std::string GetServiceStatusString(const DWORD dwCurrentState) {
 }
 
 void Console_MainProcess(HINSTANCE hInstance, const Console_CommandLineManager::CommandLineType& CommandLines, int nCmdShow) {
-	const Console_CommandLineManager::CommandLineType ReservedArgs = { "install", "uninstall", "run", "stop", "pause", "continue", "show" };
+	const Console_CommandLineManager::CommandLineType ReservedArgs = { "install", "uninstall", "start", "stop", "pause", "continue", "show" };
 	Console console{};
 	try {
 		if (std::find(ReservedArgs.begin(), ReservedArgs.end(), CommandLines.at(0)) != ReservedArgs.end()) {
 			ServiceControl SvcCtrl{};
 			if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("install")) SvcCtrl.Install();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("uninstall")) SvcCtrl.Uninstall();
-			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("run")) SvcCtrl.Run();
+			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("start")) SvcCtrl.Run();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("stop")) SvcCtrl.Stop();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("pause")) SvcCtrl.Pause();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("continue")) SvcCtrl.Pause();
