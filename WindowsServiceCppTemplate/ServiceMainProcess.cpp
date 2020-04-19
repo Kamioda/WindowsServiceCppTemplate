@@ -17,8 +17,7 @@ std::basic_string<TCHAR> GetModuleFileDirectory() {
 
 ServiceProcess::ServiceProcess(const Service_CommandLineManager::CommandLineType& args, const bool CurrentDirectoryIsModulePath)
 	: Argv(args), ModuleFileDirectory(Service_CommandLineManager::AlignCmdLineStrType(GetModuleFileDirectory())) { 
-	if (const auto ModuleDirectory = GetModuleFileDirectory(); 
-		CurrentDirectoryIsModulePath && !ModuleDirectory.empty()) std::filesystem::current_path(ModuleDirectory);
+	if (CurrentDirectoryIsModulePath && !this->ModuleFileDirectory.empty()) std::filesystem::current_path(this->ModuleFileDirectory);
 	SvcStatus.dwServiceType = SERVICE_WIN32_OWN_PROCESS;
 	SvcStatus.dwCurrentState = SERVICE_START_PENDING;
 	SvcStatus.dwControlsAccepted = SERVICE_ACCEPT_SHUTDOWN | SERVICE_ACCEPT_STOP;
