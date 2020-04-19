@@ -1,10 +1,8 @@
 ﻿#pragma once
-#include <Windows.h>
+#include "ServiceController.h"
 
-class ServiceControl {
+class ServiceControl : private ServiceController {
 private:
-	SC_HANDLE SCM;
-	SC_HANDLE Service;
 	void Open();
 	void Control(const DWORD dwControl);
 public:
