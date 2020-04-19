@@ -4,11 +4,9 @@
 #include <stdlib.h>
 
 Console::Console() : fp(nullptr) {
-	if (FALSE == AttachConsole(ATTACH_PARENT_PROCESS)) {
-		AllocConsole();
-		freopen_s(&this->fp, "CONOUT$", "w", stdout); /* 標準出力(stdout)を新しいコンソールに向ける */
-		freopen_s(&this->fp, "CONOUT$", "w", stderr); /* 標準エラー出力(stderr)を新しいコンソールに向ける */
-	}
+	if (FALSE == AttachConsole(ATTACH_PARENT_PROCESS)) AllocConsole();
+	freopen_s(&this->fp, "CONOUT$", "w", stdout);
+	freopen_s(&this->fp, "CONOUT$", "w", stderr);
 }
 
 Console::~Console() {
