@@ -21,20 +21,17 @@
     <ClCompile Include="CommandLineManager.cpp">
       <Filter>BaseCode</Filter>
     </ClCompile>
-    <ClCompile Include="Install.cpp">
-      <Filter>BaseCode</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>BaseCode</Filter>
     </ClCompile>
     <ClCompile Include="ServiceMainProcess.cpp">
       <Filter>BaseCode</Filter>
     </ClCompile>
-    <ClCompile Include="Uninstall.cpp">
-      <Filter>BaseCode</Filter>
-    </ClCompile>
     <ClCompile Include="ConsoleMainProcess.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceControl.cpp">
+      <Filter>BaseCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,13 +44,7 @@
     <ClInclude Include="GetErrorMessage.h">
       <Filter>BaseCode</Filter>
     </ClInclude>
-    <ClInclude Include="Install.h">
-      <Filter>BaseCode</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceStatus.h">
-      <Filter>BaseCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Uninstall.h">
       <Filter>BaseCode</Filter>
     </ClInclude>
     <ClInclude Include="ServiceInformation.h">
@@ -64,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="ServiceMainProcess.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceControl.h">
+      <Filter>BaseCode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
