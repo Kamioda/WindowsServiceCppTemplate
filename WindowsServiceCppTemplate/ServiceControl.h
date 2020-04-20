@@ -3,7 +3,7 @@
 
 class ServiceControl : private ServiceController {
 public:
-	ServiceControl();
+	ServiceControl(ServiceControlManager& SCManager);
 	void Install();
 	void Uninstall();
 	void Run(DWORD dwArgc = 0, LPCTSTR lpszArgv[] = nullptr);

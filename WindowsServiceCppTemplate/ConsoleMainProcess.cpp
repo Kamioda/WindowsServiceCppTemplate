@@ -2,6 +2,7 @@
 #include "ServiceControl.h"
 #include "Console.h"
 #include <Windows.h>
+#include <ShlObj.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -32,7 +33,9 @@ void Console_MainProcess(HINSTANCE hInstance, const Console_CommandLineManager::
 	Console console{};
 	try {
 		if (std::find(ReservedArgs.begin(), ReservedArgs.end(), CommandLines.at(0)) != ReservedArgs.end()) {
-			ServiceControl SvcCtrl{};
+			if (FALSE == IsUserAnAdmin()) throw std::runtime_error("This process must execute as administrators");
+			ServiceControlManager SCM{};
+			ServiceControl SvcCtrl(SCM);
 			if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("install")) SvcCtrl.Install();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("uninstall")) SvcCtrl.Uninstall();
 			else if (CommandLines.at(0) == Console_CommandLineManager::AlignCmdLineStrType("start")) SvcCtrl.Run();

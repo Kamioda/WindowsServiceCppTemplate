@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-ServiceControl::ServiceControl() : ServiceController(CommandLineManagerA::AlignCmdLineStrType(ServiceInfo::Name), false) {}
+ServiceControl::ServiceControl(ServiceControlManager& SCManager) : ServiceController(SCManager, CommandLineManagerA::AlignCmdLineStrType(ServiceInfo::Name), false) {}
 
 void ServiceControl::Install() {
 	std::basic_string<TCHAR> ModulePath{};
@@ -14,7 +14,7 @@ void ServiceControl::Install() {
 	GetModuleFileName(NULL, &ModulePath[0], MAX_PATH);
 	SERVICE_DESCRIPTION ServiceDescription;
 	if ((this->Service = CreateService(
-		this->SCM,
+		this->SCM.get(),
 		ServiceInfo::Name,
 		ServiceInfo::DisplayName,
 		SERVICE_CHANGE_CONFIG,

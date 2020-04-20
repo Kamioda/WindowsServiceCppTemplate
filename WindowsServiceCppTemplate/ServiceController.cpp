@@ -3,26 +3,19 @@
 #include <ShlObj.h>
 #include <stdexcept>
 
-ServiceController::ServiceController(const std::string& ServiceName, const bool OpenServiceInConstructor)
-	: ServiceName(ServiceName), SCM(NULL), Service(NULL), Status() {
-	if (FALSE == IsUserAnAdmin()) throw std::runtime_error("This process must execute as administrators");
-	if ((this->SCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS)) == NULL) {
-		throw std::runtime_error(
-			"Failed In OpenSCManager Function\n"
-			+ GetErrorMessageA()
-		);
-	}
+ServiceController::ServiceController(ServiceControlManager& SvcCtrlMgr, const std::string& ServiceName, const bool OpenServiceInConstructor)
+	: SCM(SvcCtrlMgr), ServiceName(ServiceName), Service(NULL), Status() {
 	if (OpenServiceInConstructor) this->Open();
 }
 
 ServiceController::~ServiceController() {
 	CloseServiceHandle(this->Service);
-	CloseServiceHandle(this->SCM);
+	CloseServiceHandle(this->SCM.get());
 }
 
 void ServiceController::Open() {
 	if (this->Service != NULL) return;
-	if (this->Service = OpenServiceA(this->SCM, this->ServiceName.c_str(), SERVICE_ALL_ACCESS); this->Service == NULL) {
+	if (this->Service = OpenServiceA(this->SCM.get(), this->ServiceName.c_str(), SERVICE_ALL_ACCESS); this->Service == NULL) {
 		throw std::runtime_error(
 			"Failed In OpenService Function\n"
 			+ GetErrorMessageA()

@@ -207,6 +207,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ServiceControl.cpp" />
     <ClCompile Include="ServiceController.cpp" />
+    <ClCompile Include="ServiceControlManager.cpp" />
     <ClCompile Include="ServiceMainProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +217,7 @@
     <ClInclude Include="GetErrorMessage.h" />
     <ClInclude Include="ServiceControl.h" />
     <ClInclude Include="ServiceController.h" />
+    <ClInclude Include="ServiceControlManager.h" />
     <ClInclude Include="ServiceInformation.h" />
     <ClInclude Include="ServiceMainProcess.h" />
     <ClInclude Include="ServiceStatus.h" />
