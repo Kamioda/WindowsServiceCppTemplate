@@ -11,5 +11,7 @@ ServiceControlManager::ServiceControlManager() {
 	}
 }
 
+ServiceControlManager::~ServiceControlManager() { CloseServiceHandle(this->SCM); }
+
 ServiceControlManager::operator const SC_HANDLE& () const noexcept { return this->SCM; }
 

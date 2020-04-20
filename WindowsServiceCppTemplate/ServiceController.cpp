@@ -10,7 +10,6 @@ ServiceController::ServiceController(ServiceControlManager& SvcCtrlMgr, const st
 
 ServiceController::~ServiceController() {
 	CloseServiceHandle(this->Service);
-	CloseServiceHandle(this->SCM.get());
 }
 
 void ServiceController::Open() {
