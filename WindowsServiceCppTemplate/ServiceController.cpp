@@ -61,7 +61,6 @@ void ServiceController::Continue() {
 DWORD ServiceController::Show() const noexcept { return this->Status.dwCurrentState; }
 
 void ServiceController::Update() {
-	this->Open();
 	if (FALSE == QueryServiceStatus(this->Service, &this->Status)) {
 		throw std::runtime_error(
 			"Failed In QueryServiceStatus Function\n"
