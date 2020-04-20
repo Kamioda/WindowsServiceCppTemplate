@@ -7,6 +7,7 @@ protected:
 	std::string ServiceName;
 	SC_HANDLE SCM;
 	SC_HANDLE Service;
+	SERVICE_STATUS Status;
 	void Open();
 	void Control(const DWORD dwControl);
 public:

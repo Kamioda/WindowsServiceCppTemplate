@@ -3,8 +3,8 @@
 #include <ShlObj.h>
 #include <stdexcept>
 
-ServiceController::ServiceController(const std::string& ServiceName, const bool OpenServiceInConstructor) 
-	: ServiceName(ServiceName), SCM(NULL), Service(NULL) {
+ServiceController::ServiceController(const std::string& ServiceName, const bool OpenServiceInConstructor)
+	: ServiceName(ServiceName), SCM(NULL), Service(NULL), Status() {
 	if (FALSE == IsUserAnAdmin()) throw std::runtime_error("This process must execute as administrators");
 	if ((this->SCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS)) == NULL) {
 		throw std::runtime_error(
@@ -31,8 +31,7 @@ void ServiceController::Open() {
 }
 
 void ServiceController::Control(const DWORD dwControl) {
-	SERVICE_STATUS SvcStatusInControl{};
-	if (FALSE == ControlService(this->Service, dwControl, &SvcStatusInControl)) {
+	if (FALSE == ControlService(this->Service, dwControl, &this->Status)) {
 		throw std::runtime_error(
 			"Failed In ControlService Function\n"
 			+ GetErrorMessageA()
@@ -67,12 +66,11 @@ void ServiceController::Continue() {
 
 DWORD ServiceController::Show() {
 	this->Open();
-	SERVICE_STATUS SvcStatusInShow{};
-	if (FALSE == QueryServiceStatus(this->Service, &SvcStatusInShow)) {
+	if (FALSE == QueryServiceStatus(this->Service, &this->Status)) {
 		throw std::runtime_error(
 			"Failed In QueryServiceStatus Function\n"
 			+ GetErrorMessageA()
 		);
 	}
-	return SvcStatusInShow.dwCurrentState;
+	return this->Status.dwCurrentState;
 }
