@@ -20,9 +20,9 @@ namespace windows {
 				}
 			}
 			HandleManager(const HandleManager&) = delete;
-			HandleManager(HandleManager&& h) : handle(std::move(h.handle)), Close(std::move(h.Close)) { h.handle = nullptr; }
+			HandleManager(HandleManager&& h) noexcept : handle(std::move(h.handle)), Close(std::move(h.Close)) { h.handle = nullptr; }
 			HandleManager& operator = (const HandleManager&) = delete;
-			HandleManager& operator = (HandleManager&& h) {
+			HandleManager& operator = (HandleManager&& h) noexcept {
 				this->handle = std::move(h.handle);
 				this->Close = std::move(h.Close);
 				h.handle = nullptr;
