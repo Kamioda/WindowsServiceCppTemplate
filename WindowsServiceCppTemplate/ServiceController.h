@@ -17,5 +17,6 @@ public:
 	void Stop();
 	void Pause();
 	void Continue();
-	DWORD Show();
+	DWORD Show() const noexcept;
+	void Update();
 };

@@ -64,7 +64,9 @@ void ServiceController::Continue() {
 	this->Control(SERVICE_CONTROL_CONTINUE);
 }
 
-DWORD ServiceController::Show() {
+DWORD ServiceController::Show() const noexcept { return this->Status.dwCurrentState; }
+
+void ServiceController::Update() {
 	this->Open();
 	if (FALSE == QueryServiceStatus(this->Service, &this->Status)) {
 		throw std::runtime_error(
@@ -72,5 +74,4 @@ DWORD ServiceController::Show() {
 			+ GetErrorMessageA()
 		);
 	}
-	return this->Status.dwCurrentState;
 }
