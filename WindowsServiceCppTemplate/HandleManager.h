@@ -26,4 +26,6 @@ public:
 	}
 	operator const Handle& () const noexcept { return this->handle; }
 	operator Handle& () noexcept { return this->handle; }
+	const Handle* operator & () const noexcept { return &this->handle; }
+	Handle* operator & () noexcept { return this->handle; }
 };
