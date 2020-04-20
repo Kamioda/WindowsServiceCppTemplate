@@ -74,5 +74,8 @@
     <ClInclude Include="ServiceControlManager.h">
       <Filter>BaseCode</Filter>
     </ClInclude>
+    <ClInclude Include="HandleManager.h">
+      <Filter>BaseCode</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,17 +4,18 @@
 #include <stdexcept>
 
 ServiceController::ServiceController(ServiceControlManager& SvcCtrlMgr, const std::string& ServiceName, const bool OpenServiceInConstructor)
-	: SCM(SvcCtrlMgr), ServiceName(ServiceName), Service(NULL), Status() {
+	: SCM(SvcCtrlMgr), ServiceName(ServiceName), Service(nullptr), Status() {
 	if (OpenServiceInConstructor) this->Open();
-}
-
-ServiceController::~ServiceController() {
-	CloseServiceHandle(this->Service);
 }
 
 void ServiceController::Open() {
 	if (this->Service != NULL) return;
-	if (this->Service = OpenServiceA(this->SCM.get(), this->ServiceName.c_str(), SERVICE_ALL_ACCESS); this->Service == NULL) {
+	if (this->Service = 
+		HandleManager<SC_HANDLE>(
+			OpenServiceA(this->SCM.get(), this->ServiceName.c_str(), SERVICE_ALL_ACCESS), 
+			[](SC_HANDLE& handle) {CloseServiceHandle(handle); }
+		);
+		this->Service == NULL) {
 		throw std::runtime_error(
 			"Failed In OpenService Function\n"
 			+ GetErrorMessageA()

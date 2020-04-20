@@ -215,6 +215,7 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="ConsoleMainProcess.h" />
     <ClInclude Include="GetErrorMessage.h" />
+    <ClInclude Include="HandleManager.h" />
     <ClInclude Include="ServiceControl.h" />
     <ClInclude Include="ServiceController.h" />
     <ClInclude Include="ServiceControlManager.h" />

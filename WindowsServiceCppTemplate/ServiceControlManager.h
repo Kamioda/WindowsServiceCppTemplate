@@ -1,11 +1,11 @@
 ﻿#pragma once
+#include "HandleManager.h"
 #include <Windows.h>
 
 class ServiceControlManager {
 private:
-	SC_HANDLE SCM;
+	HandleManager<SC_HANDLE> SCM;
 public:
 	ServiceControlManager();
-	~ServiceControlManager();
 	operator const SC_HANDLE& () const noexcept;
 };

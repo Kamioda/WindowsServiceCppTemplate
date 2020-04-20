@@ -13,21 +13,13 @@ void ServiceControl::Install() {
 	ModulePath.reserve(MAX_PATH);
 	GetModuleFileName(NULL, &ModulePath[0], MAX_PATH);
 	SERVICE_DESCRIPTION ServiceDescription;
-	if ((this->Service = CreateService(
-		this->SCM.get(),
-		ServiceInfo::Name,
-		ServiceInfo::DisplayName,
-		SERVICE_CHANGE_CONFIG,
-		SERVICE_WIN32_OWN_PROCESS,
-		ServiceInfo::DelayedStart ? SERVICE_AUTO_START : ServiceInfo::StartType,
-		SERVICE_ERROR_NORMAL,
-		ModulePath.c_str(),
-		NULL,
-		NULL,
-		NULL,
-		ServiceInfo::ExecutionUser,
-		NULL
-	)) == NULL) {
+	if (ServiceController::Service = HandleManager<SC_HANDLE>(
+		CreateService(this->SCM.get(), ServiceInfo::Name, ServiceInfo::DisplayName, SERVICE_CHANGE_CONFIG,
+			SERVICE_WIN32_OWN_PROCESS, ServiceInfo::DelayedStart ? SERVICE_AUTO_START : ServiceInfo::StartType,	SERVICE_ERROR_NORMAL,
+			ModulePath.c_str(),	NULL, NULL,	NULL, ServiceInfo::ExecutionUser, NULL
+			),
+			[](SC_HANDLE& handle) { CloseServiceHandle(handle); }
+		); ServiceController::Service == nullptr) {
 		throw std::runtime_error(
 			"Failed In CreateService Function\n"
 			+ GetErrorMessageA()
