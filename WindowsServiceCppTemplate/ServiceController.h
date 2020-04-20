@@ -7,7 +7,7 @@ class ServiceController {
 protected:
 	std::reference_wrapper<ServiceControlManager> SCM;
 	std::string ServiceName;
-	HandleManager<SC_HANDLE> Service;
+	windows::ServiceHandle Service;
 	SERVICE_STATUS Status;
 	void Open();
 	void Control(const DWORD dwControl);

@@ -3,10 +3,7 @@
 #include <stdexcept>
 
 ServiceControlManager::ServiceControlManager() 
-	: SCM(
-		OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS),
-		[](SC_HANDLE& handle) { CloseServiceHandle(handle); }
-	) {
+	: SCM(OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS)) {
 	if (this->SCM == nullptr) {
 		throw std::runtime_error(
 			"Failed In OpenSCManager Function\n"

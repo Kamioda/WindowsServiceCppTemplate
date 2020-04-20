@@ -4,7 +4,7 @@
 
 class ServiceControlManager {
 private:
-	HandleManager<SC_HANDLE> SCM;
+	windows::ServiceHandle SCM;
 public:
 	ServiceControlManager();
 	operator const SC_HANDLE& () const noexcept;
