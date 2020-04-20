@@ -8,7 +8,7 @@ private:
 	Handle handle;
 	std::function<void(Handle&)> Close;
 public:
-	HandleManager(Handle&& h, const std::function<void(Handle&)>& CloseFunc) : handle(std::move(h)), Close(CloseFunc) { h = nullptr; }
+	HandleManager(Handle&& h, std::function<void(Handle&)>&& CloseFunc) : handle(std::move(h)), Close(std::move(CloseFunc)) { h = nullptr; }
 	HandleManager(std::nullptr_t) : handle(nullptr), Close(nullptr) {}
 	~HandleManager() {
 		if (this->handle != nullptr) {
