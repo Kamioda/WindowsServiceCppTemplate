@@ -49,6 +49,7 @@ void WINAPI ServiceMain(DWORD dwArgc, LPTSTR lpszArgv[]) {
 		memset(&SvcStatus, 0, sizeof(SvcStatus));
 		ServiceProcess* SvcProcess = GetServiceProcessInstance(Service_CommandLineManager::GetCommandLineArg(GetServiceCommandLineArgs(dwArgc, lpszArgv)));
 		SvcProcess->Service_MainProcess();
+		delete SvcProcess
 	}
 	catch (...) {}
 	if (SvcStatus.dwCurrentState != SERVICE_STOPPED) SvcStatus.dwCurrentState = SERVICE_STOPPED;
