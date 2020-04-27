@@ -47,14 +47,14 @@ void WINAPI ServiceMain(DWORD dwArgc, LPTSTR lpszArgv[]) {
 		SvcStatusHandle = RegisterServiceCtrlHandlerEx(lpszArgv[0], HandlerEx, NULL);
 #endif
 		memset(&SvcStatus, 0, sizeof(SvcStatus));
-		ServiceProcess* SvcProcess = GetServiceProcessInstance(Service_CommandLineManager::GetCommandLineArg(GetServiceCommandLineArgs(dwArgc, lpszArgv)));
+		std::unique_ptr<ServiceProcess> SvcProcess = GetServiceProcessInstance(Service_CommandLineManager::GetCommandLineArg(GetServiceCommandLineArgs(dwArgc, lpszArgv)));
 		SvcProcess->Service_MainProcess();
-		delete SvcProcess
 	}
 	catch (...) {}
 	if (SvcStatus.dwCurrentState != SERVICE_STOPPED) SvcStatus.dwCurrentState = SERVICE_STOPPED;
 	SetServiceStatusInfo();
 }
+
 #if defined(_DEBUG) && defined(CONSOLE)
 #ifdef UNICODE
 int wmain(int argc, wchar_t* argv[]) {
