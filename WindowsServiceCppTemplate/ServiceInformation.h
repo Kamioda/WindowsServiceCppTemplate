@@ -3,9 +3,9 @@
 #include <tchar.h>
 
 namespace ServiceInfo {
-	constexpr TCHAR* Name = _T("");
-	constexpr TCHAR* DisplayName = _T("");
-	constexpr TCHAR* Description = _T("");
+	constexpr const TCHAR* Name = _T("");
+	constexpr const TCHAR* DisplayName = _T("");
+	constexpr const TCHAR* Description = _T("");
 	constexpr DWORD StartType = SERVICE_AUTO_START;
 	constexpr bool DelayedStart = true;
 	// LocalSystem    : NULL

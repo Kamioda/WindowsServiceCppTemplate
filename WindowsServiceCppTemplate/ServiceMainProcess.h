@@ -20,12 +20,13 @@ protected:
 	Service_CommandLineManager::CommandLineStringType ModuleFileDirectory;
 	Service_CommandLineManager::CommandLineStringType ChangeFullPath(const Service_CommandLineManager::CommandLineStringType& Path) const noexcept;
 public:
-	virtual void Service_MainProcess() = 0;
-public:
 	// Arguments
 	// args                         : Argument of GetServiceProcessInstance function
 	// CurrentDirectoryIsModulePath : Flag of moving current directory to directory module file exists. If this parameter is false, current directory is C:\Windows\System32
 	ServiceProcess(const Service_CommandLineManager::CommandLineType& args, const bool CurrentDirectoryIsModulePath = false);
+
+	virtual ~ServiceProcess() = default;
+	virtual void Service_MainProcess() = 0;
 };
 
 std::unique_ptr<ServiceProcess> GetServiceProcessInstance(const Service_CommandLineManager::CommandLineType& args);

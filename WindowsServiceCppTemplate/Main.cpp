@@ -68,14 +68,15 @@ int main(int argc, char* argv[]) {
 }
 #endif
 #else
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpCmdLine, int CmdShow) {
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In_ int CmdShow) {
 	std::strlen(lpCmdLine) == 0 ? Main_ServiceDispatcher() : Console_MainProcess(hInstance, Console_CommandLineManager::GetCommandLineArg(lpCmdLine), CmdShow);
 	return 0;
 }
 
 void Main_ServiceDispatcher() {
+	std::basic_string<TCHAR> ServiceName(ServiceInfo::Name);
 	SERVICE_TABLE_ENTRY SvcTable[] = {
-		{ ServiceInfo::Name, ServiceMain },
+		{ ServiceName.data(), ServiceMain },
 		{ NULL, NULL }
 	};
 	StartServiceCtrlDispatcher(SvcTable);

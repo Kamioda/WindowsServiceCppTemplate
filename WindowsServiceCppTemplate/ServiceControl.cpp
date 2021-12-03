@@ -22,7 +22,8 @@ void ServiceControl::Install() {
 			+ GetErrorMessageA()
 		);
 	}
-	ServiceDescription.lpDescription = ServiceInfo::Description;
+	std::basic_string<TCHAR> SvcDescription(ServiceInfo::Description);
+	ServiceDescription.lpDescription = SvcDescription.data();
 	if (ServiceInfo::DelayedStart) {
 		SERVICE_DELAYED_AUTO_START_INFO info = { TRUE };
 		if (FALSE == ChangeServiceConfig2(this->Service, SERVICE_CONFIG_DELAYED_AUTO_START_INFO, &info)) {
@@ -34,7 +35,8 @@ void ServiceControl::Install() {
 	}
 	if (!ServiceInfo::RequireAdministrator) {
 		SERVICE_REQUIRED_PRIVILEGES_INFO PrivilegesInfo = {};
-		PrivilegesInfo.pmszRequiredPrivileges = SE_INC_BASE_PRIORITY_NAME _T("\0");
+		std::basic_string<TCHAR> RequirePrivileges(SE_INC_BASE_PRIORITY_NAME _T("\0"));
+		PrivilegesInfo.pmszRequiredPrivileges = RequirePrivileges.data();
 		ChangeServiceConfig2(this->Service, SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO, &PrivilegesInfo);
 	}
 	if (FALSE == ChangeServiceConfig2(this->Service, SERVICE_CONFIG_DESCRIPTION, &ServiceDescription)) {
