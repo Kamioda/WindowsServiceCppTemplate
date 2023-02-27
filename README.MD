@@ -81,4 +81,4 @@ Service_MainProcess関数にはありません。
 
 ## 作者がこれを使って開発した・しているもの
 
-[WindowsServerResourceMonitor](https://github.com/AinoMegumi/WindowsServerResourceMonitor)
+[WindowsServerResourceMonitor](https://github.com/Kamioda/WindowsServerResourceMonitor)
