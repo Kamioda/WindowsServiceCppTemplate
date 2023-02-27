@@ -4,7 +4,7 @@
 
 ## Windowsサービスアプリケーションの概要
 
-[Microsoftのドキュメント](https://docs.microsoft.com/ja-jp/dotnet/framework/windows-services/introduction-to-windows-service-applications)をちゃんと読んで下さい。サンプルはC#だけどWindowsサービスの何たるかまでは変わりません。
+[Microsoftのドキュメント](https://docs.microsoft.com/ja-jp/dotnet/framework/windows-services/introduction-to-windows-service-applications)を必ず読んで下さい。サンプルはC#だけどWindowsサービスの何たるかまでは変わりません。
 
 ## 編集して使うファイル
 
